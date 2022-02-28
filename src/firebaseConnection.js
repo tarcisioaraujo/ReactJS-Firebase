@@ -1,5 +1,5 @@
 import firebase from "firebase/app";
-import "firebase/firestorm";
+import "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAWRMdKrRHuH9gje5Lg4FZN_5Ej_ZUWdsU",
@@ -13,7 +13,7 @@ const firebaseConfig = {
   
 if (!firebase.apps.length) {
     // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
+    const app = firebase.initializeApp(firebaseConfig);
 }
 
 export default firebase;
