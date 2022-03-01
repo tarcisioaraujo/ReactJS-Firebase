@@ -26,6 +26,21 @@ function App() {
 
   }
 
+  async function buscaPost(){
+    await firebase.firestore().collection('posts')
+    .doc('fQHjmKqcSsAdUT9Q7GqJ')
+    .get()
+    .then((snapshot)=>{
+
+     setTitulo(snapshot.data().titulo);
+     setAutor(snapshot.data().autor);
+
+    })
+    .catch(()=>{
+      console.log('DEU ALGUM ERRO')
+    })
+  }
+
   return (
     <div>
       <h1>ReactJs + Firebase</h1> <br />
@@ -38,6 +53,7 @@ function App() {
         <input type="text" value={autor} onChange={ (e) => setAutor(e.target.value) }  />
 
         <button onClick={ handleAdd }>Cadastrar</button>
+        <button onClick={ buscaPost }>Buscar Post</button>
       </div>
       
     </div>
