@@ -7,9 +7,9 @@ import firebase from "./firebaseConnection";
 function App() {
   const [titulo, setTitulo] = useState('');
   const [autor, setAutor] = useState('');
+  const [posts, setPosts] = useState([]);
 
-  async function handleAdd(){
-    
+  async function handleAdd() {    
     await firebase.firestore().collection('posts')
     .add({
       titulo: titulo,
@@ -23,10 +23,9 @@ function App() {
     .catch((error)=>{
       console.log('GEROU ALGUM ERRO: ' + error);
     })
-
   }
 
-  async function buscaPost(){
+  async function buscaPost() {
     await firebase.firestore().collection('posts')
     .doc('fQHjmKqcSsAdUT9Q7GqJ')
     .get()
@@ -38,6 +37,28 @@ function App() {
     })
     .catch(()=>{
       console.log('DEU ALGUM ERRO')
+    })
+  }
+  
+  async function litaPosts() {
+    await firebase.firestore().collection('posts')
+    .get()
+    .then((snapshot)=>{
+      let lista = [];
+
+      snapshot.forEach((doc)=>{
+        lista.push({
+          id: doc.id,
+          titulo: doc.data().titulo,
+          autor: doc.data().autor
+        })
+      })
+
+      setPosts(lista);
+
+    })
+    .catch(()=>{
+      console.log('DEU ALGUM ERRO!');
     })
   }
 
@@ -54,6 +75,18 @@ function App() {
 
         <button onClick={ handleAdd }>Cadastrar</button>
         <button onClick={ buscaPost }>Buscar Post</button>
+        <button onClick={ litaPosts }>Listar Posts</button>
+
+        <ul>
+          {posts.map((post)=>{
+            return(
+              <li key={post.id} >
+                <span>Titulo: {post.titulo} </span> <br/>
+                <span>Autor: {post.autor} </span> <br/> <br/>
+              </li>
+            )
+          })}
+        </ul>
       </div>
       
     </div>
