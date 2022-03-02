@@ -104,6 +104,14 @@ function App() {
     });
   }
 
+  async function excluirPost(id){
+    await firebase.firestore().collection('posts').doc(id)
+    .delete()
+    .then(()=>{
+      alert('Post Excluído!')
+    })
+  }
+
   return (
     <div>
       <h1>ReactJs + Firebase</h1> <br />
@@ -131,6 +139,7 @@ function App() {
                 <span>ID - {post.id} </span> <br/>
                 <span>Titulo: {post.titulo} </span> <br/>
                 <span>Autor: {post.autor} </span> <br/> <br/>
+                <button onClick={ () => excluirPost(post.id) } >Excluir post</button> <br/> <br/>
               </li>
             )
           })}
