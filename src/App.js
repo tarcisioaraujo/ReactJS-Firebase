@@ -5,6 +5,9 @@ import './style.css';
 import firebase from "./firebaseConnection";
 
 function App() {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
   const [idPost, setIdPost] = useState('');
   const [titulo, setTitulo] = useState('');
   const [autor, setAutor] = useState('');
@@ -112,9 +115,25 @@ function App() {
     })
   }
 
+  async function novoUsuario(){
+    alert('novoUsuario');
+  }
+
   return (
     <div>
       <h1>ReactJs + Firebase</h1> <br />
+
+      <div className="container">
+        <label>Email</label>
+        <input type="text" value={email} onChange={ (e) => setEmail(e.target.value) } /> <br/>
+
+        <label>Senha</label>
+        <input type="password" value={senha} onChange={ (e) => setSenha(e.target.value) } /> <br/> 
+
+        <button onClick={ novoUsuario }>Cadastrar</button>     
+      </div>
+
+      <hr/> <br/>
 
       <div className="container">
 
