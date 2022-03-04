@@ -116,7 +116,13 @@ function App() {
   }
 
   async function novoUsuario(){
-    alert('novoUsuario');
+    await firebase.auth().createUserWithEmailAndPassword(email, senha)
+    .then((value)=>{
+      console.log("Usuário cadastrado");
+    })
+    .catch((error)=>{ 
+      console.log("error " + error);
+    })
   }
 
   return (
