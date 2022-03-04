@@ -118,10 +118,12 @@ function App() {
   async function novoUsuario(){
     await firebase.auth().createUserWithEmailAndPassword(email, senha)
     .then((value)=>{
-      console.log("Usuário cadastrado");
+      console.log(value);
     })
     .catch((error)=>{ 
-      console.log("error " + error);
+      if(error.code === 'auth/weak-password'){
+        alert('Senha muito fraca..')
+      }
     })
   }
 
