@@ -122,7 +122,9 @@ function App() {
     })
     .catch((error)=>{ 
       if(error.code === 'auth/weak-password'){
-        alert('Senha muito fraca..')
+        alert('Senha muito fraca..');
+      } else if (error.code === 'auth/email-already-in-use'){
+        alert('Esse email já existe!');
       }
     })
   }
