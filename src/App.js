@@ -13,6 +13,9 @@ function App() {
   const [autor, setAutor] = useState('');
   const [posts, setPosts] = useState([]);
 
+  const [isLogeed, setIsLogeed] = useState(false);
+  const [userLogged, setUserLogged] = useState({});
+
   useEffect(()=>{
     async function loadPosts(){
       await firebase.firestore().collection('posts')
@@ -33,6 +36,30 @@ function App() {
     }
 
     loadPosts();
+
+  }, []);
+
+  useEffect(()=>{
+    
+    async function checkLogin(){
+     await firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        setIsLogeed(true);
+        setUserLogged({
+          uid: user.uid,
+          email: user.email
+        })
+        //se tem usuario logado entra aqui dentro...
+      }else{
+        //nao possui nenhum user logado.
+        setIsLogeed(false);
+        setUserLogged({});
+      }
+     })
+    }
+
+    checkLogin();
+
 
   }, []);
 
@@ -136,6 +163,14 @@ function App() {
   return (
     <div>
       <h1>ReactJs + Firebase</h1> <br />
+
+      {isLogeed && (
+        <div>
+          <strong>Seja bem vindo! (Você está logado!)</strong> <br/>
+          <span>{userLogged.uid} -  {userLogged.email}</span>
+          <br/> <br/>
+        </div>
+      )}
 
       <div className="container">
         <label>Email</label>
