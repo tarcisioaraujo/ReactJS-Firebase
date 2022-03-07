@@ -129,6 +129,10 @@ function App() {
     })
   }
 
+  async function logout(){
+    await firebase.auth().signOut();
+  }
+
   return (
     <div>
       <h1>ReactJs + Firebase</h1> <br />
@@ -140,7 +144,8 @@ function App() {
         <label>Senha</label>
         <input type="password" value={senha} onChange={ (e) => setSenha(e.target.value) } /> <br/> 
 
-        <button onClick={ novoUsuario }>Cadastrar</button>     
+        <button onClick={ novoUsuario }>Cadastrar</button>
+        <button onClick={ logout } >Sair da conta!</button>      
       </div>
 
       <hr/> <br/>
