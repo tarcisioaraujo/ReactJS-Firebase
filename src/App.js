@@ -2,7 +2,12 @@
 import { useState } from 'react';
 import './style.css';
 
+import Alunos from './components/Alunos';
+
+import UserProvider from './contexts/user';
+
 import firebase from "./firebaseConnection";
+
 
 function App() {
   const [email, setEmail] = useState('');
@@ -100,6 +105,16 @@ function App() {
           <strong>Status: </strong> {user.status ? 'ATIVO' : 'DESATIVADO'} <br/>
         </div>
       )}
+
+      <hr/> <br/>
+
+      <UserProvider>
+        <div>
+          <h1>ESCOLA</h1>
+          <hr/>
+          <Alunos/>
+        </div>
+      </UserProvider> 
       
     </div>
   );
