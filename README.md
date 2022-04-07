@@ -3,8 +3,7 @@
 Aplicação simples com objetivo de testar recursos da plataforma de desenvolvimento Firebase.
 
 <p align="center">	
-	<img src="https://img.shields.io/github/license/tarcisioaraujo/
-reactjs-firebase" alt="License">	 
+	<img src="https://img.shields.io/github/license/tarcisioaraujo/reactjs-firebase" alt="License">	 
 </p>
 
 <p align="center">
